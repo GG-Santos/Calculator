@@ -36,19 +36,19 @@
   <div class="calculator w-full max-w-xs rounded-2xl shadow-2xl p-4">
     <!-- Display -->
     <div id="display" class="bg-gray-800 text-right p-4 rounded-xl mb-4 min-h-[80px] flex flex-col justify-end">
-      <!-- Here the full expression is shown in the top line -->
       <div id="previousOperand" class="text-gray-400 text-sm h-6"></div>
-      <!-- And the current expression/result is shown in the bottom line -->
       <div id="currentOperand" class="text-white text-3xl break-all"></div>
     </div>
 
     <!-- Extra Function Buttons Row -->
     <div class="grid grid-cols-5 gap-2 mb-2">
-      <button class="calc-btn bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-xl text-xl" data-parenthesis="(">(</button>
-      <button class="calc-btn bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-xl text-xl" data-parenthesis=")">)</button>
+      <!-- Single Parenthesis Button -->
+      <button class="calc-btn bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-xl text-xl" data-parenthesis>()</button>
       <button class="calc-btn bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-xl text-xl" data-exponent="^">^</button>
       <button class="calc-btn bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-xl text-xl" data-operation>%</button>
       <button class="calc-btn bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-xl text-xl" data-action="posneg">±</button>
+      <!-- (The fifth slot can be used for spacing or an additional function if desired) -->
+      <div></div>
     </div>
 
     <!-- Main Buttons Grid -->
