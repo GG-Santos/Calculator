@@ -1,76 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Calculator</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #ffffff 0%, #faf4ff 100%);
-            min-height: 100vh;
-        }
-        .calculator {
-            backdrop-filter: blur(16px) saturate(180%);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
-            background-color: rgba(17, 25, 40, 0.75);
-            border: 1px solid rgba(255, 255, 255, 0.125);
-        }
-        .calc-btn {
-            transition: all 0.2s ease;
-        }
-        .calc-btn:active {
-            transform: scale(0.95);
-        }
-        #display {
-            font-family: 'Roboto Mono', monospace;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Calculator</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #ffffff 0%, #faf4ff 100%);
+      min-height: 100vh;
+    }
+    .calculator {
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      background-color: rgba(17, 25, 40, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.125);
+    }
+    .calc-btn {
+      transition: all 0.2s ease;
+    }
+    .calc-btn:active {
+      transform: scale(0.95);
+    }
+    #display {
+      font-family: 'Roboto Mono', monospace;
+    }
+  </style>
 </head>
 <body class="flex items-center justify-center p-4">
-    <div class="calculator w-full max-w-xs rounded-2xl shadow-2xl p-4">
-        <!-- Display -->
-        <div id="display" class="bg-gray-800 text-right p-4 rounded-xl mb-4 min-h-[80px] flex flex-col justify-end">
-            <div id="previousOperand" class="text-gray-400 text-sm h-6"></div>
-            <div id="currentOperand" class="text-white text-3xl break-all"></div>
-        </div>
-
-        <!-- Buttons Grid -->
-        <div class="grid grid-cols-4 gap-2">
-            <!-- First Row -->
-            <button class="calc-btn col-span-2 bg-red-500 hover:bg-red-600 text-white p-4 rounded-xl text-xl" data-action="clear">AC</button>
-            <button class="calc-btn bg-gray-700 hover:bg-gray-600 text-white p-4 rounded-xl text-xl" data-action="delete">DEL</button>
-            <button class="calc-btn bg-yellow-500 hover:bg-yellow-600 text-white p-4 rounded-xl text-xl" data-operation="÷">÷</button>
-
-            <!-- Second Row -->
-            <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>7</button>
-            <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>8</button>
-            <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>9</button>
-            <button class="calc-btn bg-yellow-500 hover:bg-yellow-600 text-white p-4 rounded-xl text-xl" data-operation="×">×</button>
-
-            <!-- Third Row -->
-            <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>4</button>
-            <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>5</button>
-            <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>6</button>
-            <button class="calc-btn bg-yellow-500 hover:bg-yellow-600 text-white p-4 rounded-xl text-xl" data-operation="-">-</button>
-
-            <!-- Fourth Row -->
-            <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>1</button>
-            <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>2</button>
-            <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>3</button>
-            <button class="calc-btn bg-yellow-500 hover:bg-yellow-600 text-white p-4 rounded-xl text-xl" data-operation="+">+</button>
-
-            <!-- Fifth Row -->
-            <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>0</button>
-            <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>.</button>
-            <button class="calc-btn col-span-2 bg-green-500 hover:bg-green-600 text-white p-4 rounded-xl text-xl" data-equals>=</button>
-        </div>
+  <div class="calculator w-full max-w-xs rounded-2xl shadow-2xl p-4">
+    <!-- Display -->
+    <div id="display" class="bg-gray-800 text-right p-4 rounded-xl mb-4 min-h-[80px] flex flex-col justify-end">
+      <!-- Here the full expression is shown in the top line -->
+      <div id="previousOperand" class="text-gray-400 text-sm h-6"></div>
+      <!-- And the current expression/result is shown in the bottom line -->
+      <div id="currentOperand" class="text-white text-3xl break-all"></div>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Extra Function Buttons Row -->
+    <div class="grid grid-cols-5 gap-2 mb-2">
+      <button class="calc-btn bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-xl text-xl" data-parenthesis="(">(</button>
+      <button class="calc-btn bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-xl text-xl" data-parenthesis=")">)</button>
+      <button class="calc-btn bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-xl text-xl" data-exponent="^">^</button>
+      <button class="calc-btn bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-xl text-xl" data-operation>%</button>
+      <button class="calc-btn bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-xl text-xl" data-action="posneg">±</button>
+    </div>
+
+    <!-- Main Buttons Grid -->
+    <div class="grid grid-cols-4 gap-2">
+      <!-- First Row -->
+      <button class="calc-btn col-span-2 bg-red-500 hover:bg-red-600 text-white p-4 rounded-xl text-xl" data-action="clear">AC</button>
+      <button class="calc-btn bg-gray-700 hover:bg-gray-600 text-white p-4 rounded-xl text-xl" data-action="delete">DEL</button>
+      <button class="calc-btn bg-yellow-500 hover:bg-yellow-600 text-white p-4 rounded-xl text-xl" data-operation="÷">÷</button>
+
+      <!-- Second Row -->
+      <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>7</button>
+      <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>8</button>
+      <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>9</button>
+      <button class="calc-btn bg-yellow-500 hover:bg-yellow-600 text-white p-4 rounded-xl text-xl" data-operation>×</button>
+
+      <!-- Third Row -->
+      <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>4</button>
+      <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>5</button>
+      <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>6</button>
+      <button class="calc-btn bg-yellow-500 hover:bg-yellow-600 text-white p-4 rounded-xl text-xl" data-operation>-</button>
+
+      <!-- Fourth Row -->
+      <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>1</button>
+      <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>2</button>
+      <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>3</button>
+      <button class="calc-btn bg-yellow-500 hover:bg-yellow-600 text-white p-4 rounded-xl text-xl" data-operation>+</button>
+
+      <!-- Fifth Row -->
+      <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>0</button>
+      <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl" data-number>.</button>
+      <button class="calc-btn col-span-2 bg-green-500 hover:bg-green-600 text-white p-4 rounded-xl text-xl" data-equals>=</button>
+    </div>
+
+    <!-- Extra "00" Button Row -->
+    <div class="grid grid-cols-4 gap-2 mt-2">
+      <button class="calc-btn bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-xl text-xl col-span-4" data-number>00</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
