@@ -27,30 +27,20 @@ class Calculator {
     this.updateDisplay();
   }
 
-  // New method: appendParenthesis toggles between "(" and ")" based on the context.
+  // Appends a parenthesis based on the current expression context.
   appendParenthesis() {
-    // Count unmatched opening parentheses.
     const openCount = (this.expression.match(/\(/g) || []).length;
     const closeCount = (this.expression.match(/\)/g) || []).length;
     const unmatched = openCount - closeCount;
     const lastChar = this.expression[this.expression.length - 1];
-    // If expression is empty or last character is an operator or an opening parenthesis,
-    // or there are no unmatched "(", append "(".
-    if (
-      this.expression === "" ||
-      /[+\-×÷%^(*\/]/.test(lastChar) ||
-      unmatched <= 0
-    ) {
+    if (this.expression === "" || /[+\-×÷%^(*\/]/.test(lastChar) || unmatched <= 0) {
       this.appendInput("(");
     } else {
-      // Otherwise, if there is an unmatched "(" and last character is a digit or ")",
-      // append ")".
       this.appendInput(")");
     }
   }
 
   toggleSign() {
-    // Toggle the sign of the last number in the expression.
     let regex = /(-?\d*\.?\d+)$/;
     let match = this.expression.match(regex);
     if (match) {
@@ -63,7 +53,6 @@ class Calculator {
 
   evaluateExpression() {
     if (this.expression === '') return;
-    // Replace custom symbols with JavaScript operators.
     let expr = this.expression;
     expr = expr.replace(/×/g, '*')
                .replace(/÷/g, '/')
@@ -83,61 +72,49 @@ class Calculator {
   }
 }
 
-// Initialize calculator
 const calculator = new Calculator();
 
-// Event listeners
 document.addEventListener('DOMContentLoaded', () => {
-  // Number buttons (including "00" and ".")
   document.querySelectorAll('[data-number]').forEach(button => {
     button.addEventListener('click', () => {
       calculator.appendInput(button.textContent);
     });
   });
 
-  // Operation buttons (for +, -, ×, ÷, %, etc.)
   document.querySelectorAll('[data-operation]').forEach(button => {
     button.addEventListener('click', () => {
       calculator.appendInput(button.textContent);
     });
   });
 
-  // Exponent button (appends "^")
   document.querySelectorAll('[data-exponent]').forEach(button => {
     button.addEventListener('click', () => {
       calculator.appendInput('^');
     });
   });
 
-  // Single Parenthesis button
   document.querySelector('[data-parenthesis]').addEventListener('click', () => {
     calculator.appendParenthesis();
   });
 
-  // Clear button
   document.querySelector('[data-action="clear"]').addEventListener('click', () => {
     calculator.clear();
   });
 
-  // Delete button
   document.querySelector('[data-action="delete"]').addEventListener('click', () => {
     calculator.delete();
   });
 
-  // Positive/Negative toggle button
   document.querySelector('[data-action="posneg"]').addEventListener('click', () => {
     calculator.toggleSign();
   });
 
-  // Equals button
   document.querySelector('[data-equals]').addEventListener('click', () => {
     calculator.evaluateExpression();
   });
 
-  // Keyboard support
   document.addEventListener('keydown', (event) => {
     if ((event.key >= '0' && event.key <= '9') || event.key === '.' || event.key === '(' || event.key === ')') {
-      // For parenthesis keys from keyboard, append them directly.
       calculator.appendInput(event.key);
     }
     if (['+', '-', '*', '/', '%'].includes(event.key)) {
